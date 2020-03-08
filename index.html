@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Emoji Ratings</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/csshake.min.css">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/10.6.2/bootstrap-slider.min.js"></script>
+    <script src="js/emotion-ratings.min.js"></script>
+    <script src="js/emoji.js"></script>
+    <style>
+
+        .rate {
+            text-align: center;
+            width: 200px;
+            height: 200px;
+            ouline: thin solid lightgray;
+        }
+        .emoji {
+            font-size: 120px;
+            height: 170px;
+            line-height: 170px;
+        }
+
+        input {
+            cursor: ew-resize;
+        }
+    </style>
+</head>
+<body>
+<div class="container-fluid">
+
+    <div class="row mt-3">
+        <div class="col-sm-4">
+            <div class="card">
+                <div class="card-header">
+                   Option 1
+                </div>
+                <div class="card-body"  >
+                    <h5 class="card-title">When working on the problem, I feel___</h5>
+                    <div id="option1" class="p-4" align="center"></div>
+                    <div id="txtEmoji1" align="center"></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="card">
+                <div class="card-header">
+                    Option 2
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">When working on the problem, I feel___</h5>
+                    <div id="option2" align="center">
+                        <div class="emoji">😑</div>
+                        <input id="input2" type="range" min="0" max="4" step="1">
+                        <div id="txtEmoji"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="card">
+                <div class="card-header">
+                    Option 2
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">When working on the problem, I feel___</h5>
+                    <div id="option3" align="center">
+                        <div id="emoji-div">    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+</body>
+<script>
+
+    var emotionsArray = ['angry','disappointed','meh', 'happy', 'inlove'];
+    // or a single one
+    $("#option1").emotionsRating({
+        emotionSize: 40,
+        bgEmotion: 'happy',
+        emotions: emotionsArray,
+        color: '#FF0066', //the color must be expressed with a css code
+        // initialRating: 3, //initialize the rating number
+        initialRating: false, //set if the rating can be changed or not, default is false
+        onUpdate: function(value) {
+            $("#txtEmoji1").text(emotionsArray[value])
+        } //set value changed event handler
+    });
+
+
+    var emojis = ['😠','😦','😑','😀','😍'];
+
+    $("#input2").mousemove(function(){
+        var i = $(this).val();
+        $(".emoji").html(emojis[i]);
+        $("#txtEmoji").text(emotionsArray[i])
+    });
+
+    $(function() {
+        $("#emoji-div").emoji({
+            width: '40px'
+        });
+    });
+
+</script>
+</html>
